@@ -1,3 +1,4 @@
+import tqdm
 from PIL import Image
 from transparent_background import Remover
 import time
@@ -15,10 +16,27 @@ def remove(fname, path_in, path_out):
     Image.fromarray(out).save(path_out + '/' + fname)  # save result
 
 
+# проверяем папки и процессим только новые
 folder_in = "img"
 folder_out = "img_out"
-files = os.listdir(folder_in)
-for file in files:
+files_in = os.listdir(folder_in)
+files_out = os.listdir(folder_out)
+files = []
+for file_in in files_in:
+    if file_in not in files_out:
+        files.append(file_in)
+
+len_files = len(files)
+print("Всего ", len(files_in), end="")
+print(" уже сделано ", len(files_out), end="")
+print(" осталось ", len_files)
+i = 0
+
+for file in tqdm.tqdm(files, desc='Изображения'):
+    i += 1
+    # info_str = [str(i), " из ", str(len_files), " ", str(round(i / len_files, 2)), " %  ",
+    #             str(int((time.time() - now) / 60)), " мин."]
+    # tqdm.tqdm.write("".join(info_str))
     remove(file, folder_in, folder_out)
 
-print("Прошло ", time.time() - now)
+print("Прошло ", int((time.time() - now) / 60), " мин.")
