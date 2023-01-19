@@ -5,14 +5,12 @@ import time
 import os
 
 now = time.time()
-remover = Remover(fast=False, jit=False)  # default setting 7
+remover = Remover(fast=False, jit=False)
 
 
 def remove(fname, path_in, path_out):
     img = Image.open(path_in + "/" + fname).convert('RGB')  # read image
-    # out = remover.process(img)  # default setting - transparent background
-    out = remover.process(img, type='white')  # image matting - green screen
-    # out = remover.process(img, type='blur')  # blur background
+    out = remover.process(img, type='white')  # image matting - white screen, type='blur' - blur
     Image.fromarray(out).save(path_out + '/' + fname)  # save result
 
 
@@ -34,9 +32,6 @@ i = 0
 
 for file in tqdm.tqdm(files, desc='Изображения'):
     i += 1
-    # info_str = [str(i), " из ", str(len_files), " ", str(round(i / len_files, 2)), " %  ",
-    #             str(int((time.time() - now) / 60)), " мин."]
-    # tqdm.tqdm.write("".join(info_str))
     remove(file, folder_in, folder_out)
 
 print("Прошло ", int((time.time() - now) / 60), " мин.")
