@@ -23,3 +23,5 @@ This:
 
 
 python -m  pipreqs.pipreqs --encoding utf-8  . 
+
+pip install mysql-connector-python

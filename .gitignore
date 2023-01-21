@@ -2,3 +2,6 @@ img_bg/
 .idea/
 img/
 img_out/
+config.py
+drop/
+img_out_mini/
