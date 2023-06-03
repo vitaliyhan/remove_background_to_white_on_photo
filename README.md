@@ -22,6 +22,6 @@ This:
 
 
 
-python -m  pipreqs.pipreqs --encoding utf-8  . 
+ python -m pipreqs.pipreqs --force --encoding utf-8 --use-local
 
 pip install mysql-connector-python
